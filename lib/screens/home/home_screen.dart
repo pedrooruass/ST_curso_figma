@@ -31,21 +31,21 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4),
               child: Column(
-                children: const [
+                children: [
                   Text(
                     "The biggest NFTs marketplace",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w300,
-                      color: AppColors.white,
+                      color: AppColors.white.withOpacity(0.5),
                     ),
                   ),
                   Text(
                     "of Chicago/Vernon Hills",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w300,
-                      color: AppColors.white,
+                      color: AppColors.white.withOpacity(0.5),
                     ),
                   ),
                 ],
@@ -55,16 +55,20 @@ class HomeScreen extends StatelessWidget {
               height: 24,
             ),
             textFormFieldCredentialsWidget(
-                hint: "Login", iconAsset: "assets/icons/User.png"),
+              hint: "Login",
+              iconAsset: "assets/icons/User.png",
+              isLogin: true,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 textFormFieldCredentialsWidget(
                   hint: "Password",
                   iconAsset: "assets/icons/Locker.png",
+                  isLogin: false,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.only(top: 8, bottom: 16),
                   child: GradientText(
                     "Forgot Password?",
                     colors: const [
@@ -86,11 +90,20 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(vertical: 4),
               height: 48,
-              width: 271,
+              width: 342,
               decoration: BoxDecoration(
-                gradient: AppColors.gradient1,
-                borderRadius: BorderRadius.circular(8),
-              ),
+                  gradient: AppColors.gradient1,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.p500.withOpacity(0.5),
+                      blurRadius: 33,
+                    ),
+                    BoxShadow(
+                      color: AppColors.s500.withOpacity(0.5),
+                      blurRadius: 33,
+                    ),
+                  ]),
               child: const Text(
                 "Enter",
                 style: TextStyle(
@@ -121,21 +134,21 @@ class HomeScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   margin: const EdgeInsets.all(2),
                   height: 48,
-                  width: 271,
+                  width: 342,
                   decoration: BoxDecoration(
                     color: AppColors.background,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: GradientText(
-                      "Enter with Metamask",
-                      colors: const [
-                        Color(0xFF9A4DFF),
-                        Color(0xFFF600DD),
-                      ],
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    "Enter with Metamask",
+                    colors: const [
+                      Color(0xFF9A4DFF),
+                      Color(0xFFF600DD),
+                    ],
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
@@ -170,17 +183,24 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget textFormFieldCredentialsWidget(
-      {required String hint, required String iconAsset}) {
+      {required String hint,
+      required String iconAsset,
+      required bool isLogin}) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      height: 48,
-      width: 271,
+      height: 46,
+      width: 342,
       decoration: BoxDecoration(
+        color: AppColors.white.withOpacity(0.1),
         border: Border.all(
-          color: Colors.white,
+          color: const Color(0xFF474053),
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: isLogin
+            ? const BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8))
+            : const BorderRadius.only(
+                bottomLeft: Radius.circular(8),
+                bottomRight: Radius.circular(8)),
       ),
       child: TextFormField(
         textAlign: TextAlign.start,
@@ -191,10 +211,10 @@ class HomeScreen extends StatelessWidget {
             color: AppColors.white,
           ),
           hintText: hint,
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: AppColors.white,
+            fontWeight: FontWeight.w300,
+            color: AppColors.white.withOpacity(0.5),
           ),
         ),
       ),
